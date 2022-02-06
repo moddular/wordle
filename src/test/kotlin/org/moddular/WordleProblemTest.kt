@@ -4,7 +4,7 @@ import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 import com.natpryce.hamkrest.assertion.assertThat
 
-class ProgramTest {
+class WordleProblemTest {
 
     @Test
     fun `should handle a correct guess`() {
@@ -46,6 +46,12 @@ class ProgramTest {
     fun `should handle a guess that contains punctuation`() {
         val problem = Problem("hello")
         assertThat(result(problem, "hell.").invalid(), equalTo(true))
+    }
+
+    @Test
+    fun `should trim whitespace from the guess`() {
+        val problem = Problem("hello")
+        assertThat(result(problem," hello ").correct(), equalTo(true))
     }
 
     @Test
