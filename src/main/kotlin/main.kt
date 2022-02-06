@@ -19,7 +19,7 @@ class Attempt(private val solution: String, private val guess: String) {
         return guess.mapIndexed { i, c ->
             when {
                 solution[i] == c -> Correct(c)
-                stillToGuess.getOrDefault(c, 0) >= guessWithCorrectCharsReplaced.take( i + 1).count { it == c } -> WrongPosition(c)
+                stillToGuess.getOrDefault(c, 0) >= guessWithCorrectCharsReplaced.take(i + 1).count { it == c } -> WrongPosition(c)
                 else -> Incorrect(c)
             }
         }
@@ -115,7 +115,7 @@ class Dictionary {
 }
 
 class Wordle(private val terminal: Terminal) {
-    fun solve(length: Int) {
+    fun run(length: Int) {
         val word = Dictionary().random(length)
         if (word != null) {
             terminal.run(Problem(word))
@@ -126,5 +126,5 @@ class Wordle(private val terminal: Terminal) {
 }
 
 fun main(args: Array<String>) {
-    Wordle(Terminal(System.`in`, System.out)).solve(args.firstOrNull()?.toInt() ?: 5)
+    Wordle(Terminal(System.`in`, System.out)).run(args.firstOrNull()?.toInt() ?: 5)
 }
