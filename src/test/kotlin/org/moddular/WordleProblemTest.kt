@@ -55,6 +55,12 @@ class WordleProblemTest {
     }
 
     @Test
+    fun `should handle a problem longer than 5 letters`() {
+        val problem = Problem("salutations")
+        assertThat(result(problem,"salutations").correct(), equalTo(true))
+    }
+
+    @Test
     fun `should count the attempts`() {
         val problem = Problem("hello")
         assertThat(count(problem, "check"), equalTo(1))

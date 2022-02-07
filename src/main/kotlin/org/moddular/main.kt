@@ -108,7 +108,11 @@ class Terminal(private val input: InputStream, private val output: PrintStream) 
 }
 
 class Dictionary {
-    private val words = listOf("hello", "foods", "bobby", "table", "fizzy", "fuzzy", "pizza", "angry", "above", "about", "abort", "elbow", "thigh", "heads", "knits", "shoes", "think", "thank", "thunk")
+    private val words = this::class.java.getResourceAsStream("dictionary.txt")
+        .bufferedReader()
+        .readLines()
+        .map { it.trim().lowercase() }
+        .filter { it.isNotEmpty() }
 
     fun random(length: Int) =
         words.filter { it.length == length }.let { if (it.isNotEmpty()) it.random() else null }
